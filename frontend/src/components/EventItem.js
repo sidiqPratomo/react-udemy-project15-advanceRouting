@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 function EventItem({ event }) {
   function startDeleteHandler() {
-    // ...
+    const proceed = window.confirm("Are You Sure?");
+    if (proceed) {
+    }
   }
 
   return (
