@@ -7,12 +7,13 @@ function EventForm({ method, event }) {
   const navigation = useNavigation();
 
   const isSubmitting = navigation.state === "submitting";
+
   function cancelHandler() {
     navigate("..");
   }
 
   return (
-    <Form method="post" className={classes.form}>
+    <Form method={method} className={classes.form}>
       {data && data.errors && (
         <ul>
           {Object.values(data.errors).map((err) => (
@@ -40,7 +41,7 @@ function EventForm({ method, event }) {
         <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
           Cancel
         </button>
-        <button disabled={isSubmitting}>{isSubmitting ? "Sumitting" : "Save"}</button>
+        <button disabled={isSubmitting}>{isSubmitting ? "Submitting..." : "Save"}</button>
       </div>
     </Form>
   );
@@ -74,7 +75,7 @@ export async function action({ request, params }) {
     body: JSON.stringify(eventData),
   });
 
-  if ((response.status = 422)) {
+  if (response.status === 422) {
     return response;
   }
 
